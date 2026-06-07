@@ -16,3 +16,5 @@ insert into reply_tb (comment, board_id, user_id,created_at) values ('comment2',
 insert into reply_tb (comment, board_id, user_id,created_at) values ('comment3', 4, 2,now());
 insert into reply_tb (comment, board_id, user_id,created_at) values ('comment4', 5, 1,now());
 insert into reply_tb (comment, board_id, user_id,created_at) values ('comment5', 5, 1,now());
+
+
