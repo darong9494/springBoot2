@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class User implements UserDetails {
     @Column(length = 30, nullable = false)
     private String email;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     // JPA 가 뒤에서 쿼리를 짜서 데이터베이스에 테이블을 자동으로 만들어 줌(굳이 ROLE 엔티티 선언 불 필요)
     @CollectionTable(name = "user_role_tb", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
@@ -41,7 +42,14 @@ public class User implements UserDetails {
     @CreationTimestamp
     private Timestamp createdAt;
 
-    // UserDetails 필수 구현 메서드
+    public void update(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public void updateRoles(List<String> roles) {
+        this.roles = roles;
+    }
 
     // 스프링 시큐리티 권한 처리
     @Override
