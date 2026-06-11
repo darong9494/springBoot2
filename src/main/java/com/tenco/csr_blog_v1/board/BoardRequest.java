@@ -21,4 +21,13 @@ public class BoardRequest {
                     .build();
         }
     }
+
+    public record UpdateDTO(
+            @Size(min = 1, max = 30, message = "제목은 1자이상 30자 이하로 입력해주세요.")
+            @NotEmpty(message = "제목을 입력하세요.")
+            String title,
+            @Size(min = 1, max = 300, message = "내용은 1자이상 300자 이하로 입력해주세요.")
+            @NotEmpty(message = "내용을 입력하세요.")
+            String content
+    ) {}
 }

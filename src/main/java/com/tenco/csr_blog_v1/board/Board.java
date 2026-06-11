@@ -23,7 +23,7 @@ public class Board {
     @Column(length = 50, nullable = false)
     private String title;
     @Column(length = 500, nullable = false)
-    private String Content;
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     // @JoinColumn(name = "user_id")  <-- 기본값으로 설정 됨
@@ -42,8 +42,13 @@ public class Board {
     public Board(Integer id, String title, String content, User user, Timestamp createdAt) {
         this.id = id;
         this.title = title;
-        Content = content;
+        content = content;
         this.user = user;
         this.createdAt = createdAt;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 }
